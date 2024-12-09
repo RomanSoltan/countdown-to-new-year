@@ -1,0 +1,62 @@
+.countdown {
+  --number-color: hsl(0 0% 100%);
+  --text-color: hsl(0 0% 25%);
+  --dot-color: hsl(0 0% 10%);
+  --dot-color-remaining: hsl(182, 100%, 66%);
+  --dot-color-active: hsl(0 100% 50%);
+  font-family: system-ui, sans-serif;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  width: min(60rem, 100%);
+  margin-inline: auto;
+  container: inline-size;
+  > .part {
+    aspect-ratio: 1/1;
+    display: grid;
+    place-items: center;
+    > .remaining {
+      grid-area: 1/1;
+      color: hsl(0 0% 100%);
+      display: grid;
+      text-align: center;
+      font-size: 4cqi;
+      >.number {
+        color: var(--number-color);
+      }
+      >.text {
+        color: var(--text-color);
+        text-transform: uppercase;
+        font-size: 0.5rem;
+      }
+    }
+    > .dot-container {
+      grid-area: 1/1;
+      height: 100%;
+      width: 4%;
+      rotate: calc(360deg / var(--dots) * var(--dot-idx));
+      > .dot {
+        width: 100%;
+        aspect-ratio: 1/1;
+        background-color: var(--dot-color);
+        border-radius: 50%;
+        transition: background-color 0.25s;
+        &[data-active='true'] {
+          background-color: var(--dot-color-remaining);
+          &[data-lastactive='true'] {
+            background-color: var(--dot-color-active);
+          }
+        }
+      }
+    }
+  }
+}
+
+h1 {
+  font-family: system-ui, sans-serif;
+  color: hsl(0 0% 100%);
+  text-align: center;
+  > span:last-of-type {
+    color: hsl(182 100% 66%);
+  }
+}
